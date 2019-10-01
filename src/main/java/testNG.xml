@@ -1,31 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="jhj">
- <test name="TestsFor-Android-k">
-  <parameter name="os" value="Android"/>
-  <parameter name="device" value="k"/>
- </test>
- <test name="TestsFor-Android-k">
-  <parameter name="os" value="Android"/>
-  <parameter name="device" value="k"/>
- </test>
- <test name="TestsFor-Android-k">
-  <parameter name="os" value="Android"/>
-  <parameter name="device" value="k"/>
- </test>
- <test name="TestsFor-Android- ">
-  <parameter name="os" value="Android"/>
-  <parameter name="device" value=" "/>
- </test>
- <test name="TestsFor-Android-k">
-  <parameter name="os" value="Android"/>
-  <parameter name="device" value="k"/>
- </test>
- <test name="TestsFor-Android-k">
-  <parameter name="os" value="Android"/>
-  <parameter name="device" value="k"/>
- </test>
- <test name="TestsFor-Android-k">
-  <parameter name="os" value="Android"/>
-  <parameter name="device" value="k"/>
+<suite name="checkLoginFunctionality">
+ <test name="TestsFor-android-pixel 2">
+  <parameter name="os" value="android"/>
+  <parameter name="device" value="pixel 2"/>
+  <classes>
+   <class name="com.news_app.mobile.test.LoginPageTest"/>
+  </classes>
  </test>
 </suite>
