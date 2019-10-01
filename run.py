@@ -32,11 +32,13 @@ parser.add_argument("-c", "--className", nargs='+',
 
 parser.add_argument("--testName",
                     default="AppTest")
-parser.add_argument("--app_path",
+parser.add_argument("--appPath",
+                    default=DEFAULT_APK_DIRECTORY + DEFAULT_APK_FILE_NAME, help="file path to APK binary")
+parser.add_argument("--platformName",
                     default="")
-parser.add_argument("--device",
+parser.add_argument("--deviceName",
                     default="")
-parser.add_argument("--os",
+parser.add_argument("--osVersion",
                     default="")
 
 args = parser.parse_args()
@@ -71,14 +73,18 @@ def generate_parameters():
         parameter = xmlParser.Element('parameter', name=name, value=value)
         TESTNG_XML.append(parameter)
 
-def generate_test(platform_name, device_name):
+def generate_test(platform_name, device_name, os_version, app_path):
     """
     Creates XML for TestNG tests
     """
     if args.className != None:
         test = xmlParser.Element('test', name='TestsFor-' + platform_name + '-' + device_name)
-        platform_parameter = xmlParser.Element('parameter', name='os', value=platform_name)
-        device_parameter = xmlParser.Element('parameter', name='device', value=device_name)
+        platform_parameter = xmlParser.Element('parameter', name='platformName', value=platform_name)
+        device_parameter = xmlParser.Element('parameter', name='deviceName', value=device_name)
+        os_version_parameter = xmlParser.Element('parameter', name='osVersion', value=os_version)
+        app_path_parameter = xmlParser.Element('parameter', name='appPath', value=app_path)
+        test.append(os_version_parameter)
+        test.append(app_path_parameter)
         test.append(platform_parameter)
         test.append(device_parameter)
         test.append(create_classes())
@@ -104,7 +110,7 @@ def generate_testng():
     """
     Add test tags in TestNG XML
     """
-    TESTNG_XML.append(generate_test(args.os, args.device.replace('_', ' ')))
+    TESTNG_XML.append(generate_test(args.platformName, args.deviceName.replace('_', ' '), args.osVersion, ROOT_DIR + '/' + args.appPath))
 
 def main():
 
@@ -115,7 +121,8 @@ def main():
     generate_testngxml_file()
 
     print ('java -cp ' + ROOT_DIR + '/target/news_app-1.0-SNAPSHOT.jar org.testng.TestNG ' + ROOT_DIR + '/src/main/java/testNG.xml')
-    terminal.call(["java", "-cp","target/news_app-1.0-SNAPSHOT.jar","org.testng.TestNG","src/main/java/testNG.xml"])
+    terminal.call(["java", "-cp","target/news_app-1.0-SNAPSHOT-jar-with-dependencies.jar","org.testng.TestNG","src/main/java/testNG.xml"])
 
 if __name__ == '__main__':
     main()
+

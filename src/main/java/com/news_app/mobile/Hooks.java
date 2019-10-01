@@ -7,6 +7,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,12 +21,21 @@ public class Hooks {
     MobileDriver driver;
 
     @BeforeClass
+    @Parameters({"platformName", "deviceName", "osVersion", "appPath"})
+    public void setUp(String platformName, String deviceName, String osVersion, String appPath) {
+        System.setProperty("osVersion", osVersion);
+        System.setProperty("deviceName", deviceName);
+        System.setProperty("platformName", platformName);
+        System.setProperty("app", appPath);
+    }
+
+    @BeforeClass
     public void setUp() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("version", "9.0");
-        capabilities.setCapability("deviceName","Emulator");
-        capabilities.setCapability("platformName","Android");
-        capabilities.setCapability("appPackage", "com.example.anush.demo_news");
+        capabilities.setCapability("version", System.getProperty("osVersion"));
+        capabilities.setCapability("deviceName",System.getProperty("deviceName"));
+        capabilities.setCapability("platformName",System.getProperty("platformName"));
+        capabilities.setCapability("app", System.getProperty("app"));
         capabilities.setCapability("appActivity","com.example.anush.demo_news.activities.MainActivity");
         try {
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
