@@ -1,0 +1,13 @@
+{
+  "isLocal": "true",
+  "appPackage": "app package",
+  "deviceType": "mobile",
+  "noReset": "true",
+  "appActivity": ".MainActivity",
+  "appPath": "",
+  "platformName": "Android",
+  "platformVersion": "9.0",
+  "deviceName": "Google Pixel 2",
+  "udid": "emulator-5554"
+}
+

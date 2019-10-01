@@ -1,0 +1,31 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="jhj">
+ <test name="TestsFor-Android-k">
+  <parameter name="os" value="Android"/>
+  <parameter name="device" value="k"/>
+ </test>
+ <test name="TestsFor-Android-k">
+  <parameter name="os" value="Android"/>
+  <parameter name="device" value="k"/>
+ </test>
+ <test name="TestsFor-Android-k">
+  <parameter name="os" value="Android"/>
+  <parameter name="device" value="k"/>
+ </test>
+ <test name="TestsFor-Android- ">
+  <parameter name="os" value="Android"/>
+  <parameter name="device" value=" "/>
+ </test>
+ <test name="TestsFor-Android-k">
+  <parameter name="os" value="Android"/>
+  <parameter name="device" value="k"/>
+ </test>
+ <test name="TestsFor-Android-k">
+  <parameter name="os" value="Android"/>
+  <parameter name="device" value="k"/>
+ </test>
+ <test name="TestsFor-Android-k">
+  <parameter name="os" value="Android"/>
+  <parameter name="device" value="k"/>
+ </test>
+</suite>
