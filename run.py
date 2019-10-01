@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser(description="Run NewsApp Mobile UI tests",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 parser.add_argument("-c", "--className", nargs='+',
-                    choices=("LoginPageTests", "CreateAccountPageTests"),
+                    choices=("LoginPageTest", "CreateAccountPageTest"),
                     help="Reporting to run",
                     default="LoginPageTests")
 
@@ -81,7 +81,7 @@ def generate_test(platform_name, device_name):
         device_parameter = xmlParser.Element('parameter', name='device', value=device_name)
         test.append(platform_parameter)
         test.append(device_parameter)
-        #test.append(create_classes())
+        test.append(create_classes())
         return test
 
 def create_classes():
@@ -100,37 +100,11 @@ def create_classes():
             classes.append(class_xmp)
     return classes
 
-def generate_android_devices():
-    """
-    Collect Android devices list
-    """
-    androidDevices = []
-    for device in args.androidDevices:
-        androidDevices.append(device.replace('_', ' '))
-    DEVICES.append('Android')
-    return androidDevices
-
 def generate_testng():
     """
     Add test tags in TestNG XML
     """
-    for android_device in args.device:
-        TESTNG_XML.append(generate_test('Android', android_device.replace('_', ' ')))
-
-def reconcile_file_path(filepath,default_path=ROOT_DIR):
-    """
-    Reconciles all filepaths into absolute filepaths
-    """
-    absolute_filepath = None
-    # relative or absolute filepath given, replace with absolute path
-    if os.path.isfile(filepath):
-        absolute_filepath = os.path.realpath(filepath)
-    #reconcile if only file name was given by checking default directory
-    else:
-        absolute_filepath = default_path + filepath
-        if not os.path.isfile(absolute_filepath):
-            raise Exception('Error: file not found ' + filepath)
-    return absolute_filepath
+    TESTNG_XML.append(generate_test(args.os, args.device.replace('_', ' ')))
 
 def main():
 
@@ -140,7 +114,7 @@ def main():
 
     generate_testngxml_file()
 
-    print ('java -cp ' + ROOT_DIR + '/target/new_brand-1.0-SNAPSHOT-jar-with-dependencies.jar org.testng.TestNG ' + ROOT_DIR + '/src/main/java/testNG.xml')
+    print ('java -cp ' + ROOT_DIR + '/target/news_app-1.0-SNAPSHOT.jar org.testng.TestNG ' + ROOT_DIR + '/src/main/java/testNG.xml')
     terminal.call(["java", "-cp","target/news_app-1.0-SNAPSHOT.jar","org.testng.TestNG","src/main/java/testNG.xml"])
 
 if __name__ == '__main__':
