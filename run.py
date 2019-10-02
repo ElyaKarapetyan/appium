@@ -9,10 +9,10 @@ import json
 
 #PATH CONSTANTS
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_APK_DIRECTORY = ROOT_DIR + '/src/main/resources/apkIpaFile/'
+DEFAULT_APK_DIRECTORY = 'src/main/resources/apkIpaFile/'
 DEFAULT_CONFIG_DIRECTORY = ROOT_DIR + '/src/main/resources/config/'
 TESTNG_XML_PATH = "/src/main/java/testNG.xml"
-CLASS_NAME_PREFIX = "com.news_app.mobile.test."
+CLASS_NAME_PREFIX = "com.news_app.mobile.test"
 CLASS_NAME_PATH_PREFIX = "/src/main/java/com/news_app/mobile/test/"
 DEFAULT_APK_FILE_NAME = 'app-release.apk'
 DEFAULT_LOCAL_CONFIG_FILE_NAME = 'devicesConfig.json'
@@ -27,9 +27,7 @@ parser = argparse.ArgumentParser(description="Run NewsApp Mobile UI tests",
 
 parser.add_argument("-c", "--className", nargs='+',
                     choices=("LoginPageTest", "CreateAccountPageTest"),
-                    help="Reporting to run",
-                    default="LoginPageTests")
-
+                    help="Reporting to run")
 parser.add_argument("--testName",
                     default="AppTest")
 parser.add_argument("--appPath",
@@ -93,6 +91,31 @@ def generate_test(platform_name, device_name, os_version, device_id, app_path):
         test.append(device_id_parameter)
         test.append(create_classes())
         return test
+    else:
+        test = xmlParser.Element('test', name='TestsFor-' + platform_name + '-' + device_name)
+        platform_parameter = xmlParser.Element('parameter', name='platformName', value=platform_name)
+        device_parameter = xmlParser.Element('parameter', name='deviceName', value=device_name)
+        os_version_parameter = xmlParser.Element('parameter', name='osVersion', value=os_version)
+        device_id_parameter = xmlParser.Element('parameter', name='deviceID', value=device_id)
+        app_path_parameter = xmlParser.Element('parameter', name='appPath', value=app_path)
+        test.append(os_version_parameter)
+        test.append(app_path_parameter)
+        test.append(platform_parameter)
+        test.append(device_parameter)
+        test.append(device_id_parameter)
+        test.append(create_package())
+        return test
+
+def create_package():
+    """
+    Creates XML for TestNG package
+    """
+    packages = xmlParser.Element('packages')
+    current_work_dir = os.getcwd()
+    packageName = CLASS_NAME_PREFIX
+    package_xmp = xmlParser.Element('package', name=packageName)
+    packages.append(package_xmp)
+    return packages
 
 def create_classes():
     """
@@ -101,7 +124,7 @@ def create_classes():
     classes = xmlParser.Element('classes')
     current_work_dir = os.getcwd()
     for next_class in args.className:
-        newClassName = CLASS_NAME_PREFIX + next_class
+        newClassName = CLASS_NAME_PREFIX + "." + next_class
         test_file = current_work_dir + CLASS_NAME_PATH_PREFIX + next_class + ".java"
         if os.path.isfile(test_file) == False:
             return False
@@ -114,7 +137,7 @@ def generate_testng():
     """
     Add test tags in TestNG XML
     """
-    TESTNG_XML.append(generate_test(args.platformName, args.deviceName.replace('_', ' '), args.osVersion, args.deviceID, args.appPath))
+    TESTNG_XML.append(generate_test(args.platformName, args.deviceName.replace('_', ' '), args.osVersion, args.deviceID, ROOT_DIR + "/" + args.appPath))
 
 def main():
 
