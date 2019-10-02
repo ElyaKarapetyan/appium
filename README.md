@@ -21,5 +21,5 @@ To run test cases follow the steps mentioned bellow
                    --className <class name to run(e.g LoginPageTest)>\
                    --testName <test name from test class>\
                    
-  Simple run example 
+  Simple run command 
   - python3 run.py ----deviceName Google_Pixel_2 --osVersion 9.0 --deviceID <device_id>
