@@ -1,14 +1,11 @@
 package com.news_app.mobile;
 
 import com.news_app.mobile.constants.Constants;
-import com.news_app.mobile.utils.helper.WaitHelpers;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,6 +31,7 @@ public class Hooks {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("noReset", false);
         capabilities.setCapability("version", System.getProperty("osVersion"));
         capabilities.setCapability("deviceName",System.getProperty("deviceName"));
         capabilities.setCapability("platformName",System.getProperty("platformName"));
@@ -47,6 +45,11 @@ public class Hooks {
             e.printStackTrace();
         }
         waitForProgress();
+    }
+
+    public void quitDriver() {
+        Constants.driver.closeApp();
+        Constants.driver.quit();
     }
 
     private void waitForProgress() {

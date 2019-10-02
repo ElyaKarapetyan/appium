@@ -4,6 +4,8 @@ import com.news_app.mobile.constants.Constants;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.NoSuchElementException;
 
+import java.sql.Timestamp;
+
 import static java.lang.Thread.sleep;
 
 public class Helper {
@@ -30,5 +32,14 @@ public class Helper {
             currentTime = System.currentTimeMillis();
         }
         return mobileElement;
+    }
+
+    public static String generateEmail() {
+        return String.format("test_%s@gmail.com", getCurrentTimestamp());
+    }
+
+    public static String getCurrentTimestamp() {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return String.valueOf(timestamp.getTime());
     }
 }

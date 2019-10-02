@@ -18,14 +18,6 @@ public class LoginPageFactory {
     private MobileElement loginButton;
     private MobileElement createAccountLinkedText;
 
-    public static LoginPageFactory getInstance() {
-        if (loginPageFactory == null) {
-            loginPageFactory = new LoginPageFactory();
-        }
-        return loginPageFactory;
-    }
-
-
     public LoginPageFactory() {
         lockIcon = findElementById("com.example.anush.demo_news:id/imgView_logo");
         emailInputField = findElementById("com.example.anush.demo_news:id/emailText");
@@ -69,4 +61,8 @@ public class LoginPageFactory {
         return createAccountLinkedText;
     }
 
+    public CreateAccountPageFactory clickOnCreateAccountLinkedText() {
+        createAccountLinkedText.click();
+        return new CreateAccountPageFactory();
+    }
 }

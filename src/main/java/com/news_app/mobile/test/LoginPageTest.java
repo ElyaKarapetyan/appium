@@ -2,6 +2,7 @@ package com.news_app.mobile.test;
 
 import com.news_app.mobile.Hooks;
 import com.news_app.mobile.pages.LoginPageFactory;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -14,7 +15,7 @@ public class LoginPageTest extends Hooks {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         super.setUp();
-        pageFactory = LoginPageFactory.getInstance();
+        pageFactory = new LoginPageFactory();
     }
 
     @Test
@@ -23,5 +24,10 @@ public class LoginPageTest extends Hooks {
         pageFactory.typePassword("Tester001!");
         pageFactory.clickOnLoginButton();
         assertFalse(pageFactory.getLoginButton().isDisplayed(), "Failed to log in into app");
+    }
+
+    @AfterClass
+    public void tearDown() {
+        super.quitDriver();
     }
 }
