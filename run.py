@@ -9,7 +9,7 @@ import json
 
 #PATH CONSTANTS
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_APK_DIRECTORY = 'src/main/resources/apkIpaFile/'
+DEFAULT_APK_DIRECTORY = ROOT_DIR + '/src/main/resources/apkIpaFile/'
 DEFAULT_CONFIG_DIRECTORY = ROOT_DIR + '/src/main/resources/config/'
 TESTNG_XML_PATH = "/src/main/java/testNG.xml"
 CLASS_NAME_PREFIX = "com.news_app.mobile.test"
@@ -136,7 +136,7 @@ def generate_testng():
     """
     Add test tags in TestNG XML
     """
-    TESTNG_XML.append(generate_test(args.platformName, args.deviceName.replace('_', ' '), args.osVersion, args.deviceID, ROOT_DIR + "/" + args.appPath))
+    TESTNG_XML.append(generate_test(args.platformName, args.deviceName.replace('_', ' '), args.osVersion, args.deviceID, args.appPath))
 
 def main():
 
@@ -148,7 +148,7 @@ def main():
 
     print ('java -cp ' + ROOT_DIR + '/target/news_app-1.0-SNAPSHOT.jar org.testng.TestNG ' + ROOT_DIR + '/src/main/java/testNG.xml')
     terminal.call(["mvn", "package"])
-    terminal.run(["appium"])
+    # terminal.run(["appium"])
     terminal.call(["java", "-cp","target/news_app-1.0-SNAPSHOT-jar-with-dependencies.jar","org.testng.TestNG","src/main/java/testNG.xml"])
 
 if __name__ == '__main__':
