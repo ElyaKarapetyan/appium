@@ -7,6 +7,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
@@ -20,21 +21,23 @@ public class Hooks {
 
     MobileDriver driver;
 
-    @BeforeClass
-    @Parameters({"platformName", "deviceName", "osVersion", "appPath"})
-    public void setUp(String platformName, String deviceName, String osVersion, String appPath) {
+    @BeforeClass(alwaysRun = true)
+    @Parameters({"platformName", "deviceName", "osVersion", "appPath", "deviceID"})
+    public void setUp(String platformName, String deviceName, String osVersion, String appPath, String deviceID) {
         System.setProperty("osVersion", osVersion);
         System.setProperty("deviceName", deviceName);
+        System.setProperty("udid", deviceID);
         System.setProperty("platformName", platformName);
         System.setProperty("app", appPath);
     }
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setUp() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("version", System.getProperty("osVersion"));
         capabilities.setCapability("deviceName",System.getProperty("deviceName"));
         capabilities.setCapability("platformName",System.getProperty("platformName"));
+        capabilities.setCapability("udid", System.getProperty("udid"));
         capabilities.setCapability("app", System.getProperty("app"));
         capabilities.setCapability("appActivity","com.example.anush.demo_news.activities.MainActivity");
         try {

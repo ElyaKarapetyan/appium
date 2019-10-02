@@ -1,8 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="checkLoginFunctionality">
- <test name="TestsFor-android-pixel 2">
-  <parameter name="os" value="android"/>
-  <parameter name="device" value="pixel 2"/>
+ <test name="TestsFor-Android-Google Pixel 3">
+  <parameter name="osVersion" value="9.0"/>
+  <parameter name="appPath" value="/home/arman_av/Desktop/digitec/appium/src/main/resources/apkIpaFile/app-release.apk"/>
+  <parameter name="platformName" value="Android"/>
+  <parameter name="deviceName" value="Google Pixel 3"/>
+  <parameter name="deviceID" value="R28M1363APR"/>
   <classes>
    <class name="com.news_app.mobile.test.LoginPageTest"/>
   </classes>
