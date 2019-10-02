@@ -148,7 +148,7 @@ def main():
 
     print ('java -cp ' + ROOT_DIR + '/target/news_app-1.0-SNAPSHOT.jar org.testng.TestNG ' + ROOT_DIR + '/src/main/java/testNG.xml')
     terminal.call(["mvn", "package"])
-    # terminal.run(["appium"])
+    terminal.run(["appium"])
     terminal.call(["java", "-cp","target/news_app-1.0-SNAPSHOT-jar-with-dependencies.jar","org.testng.TestNG","src/main/java/testNG.xml"])
 
 if __name__ == '__main__':
