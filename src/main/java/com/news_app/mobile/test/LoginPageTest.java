@@ -3,8 +3,9 @@ package com.news_app.mobile.test;
 import com.news_app.mobile.Hooks;
 import com.news_app.mobile.pages.LoginPageFactory;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
 
 public class LoginPageTest extends Hooks {
 
@@ -18,7 +19,9 @@ public class LoginPageTest extends Hooks {
 
     @Test
     public void checkLoginFunctionality() {
-        pageFactory.typeEmail("testuser@gmail.com");
+        pageFactory.typeEmail("test@gmail.com");
         pageFactory.typePassword("Tester001!");
+        pageFactory.clickOnLoginButton();
+        assertFalse(pageFactory.getLoginButton().isDisplayed(), "Failed to log in into app");
     }
 }

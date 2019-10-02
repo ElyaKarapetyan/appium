@@ -9,11 +9,14 @@ import static java.lang.Thread.sleep;
 public class Helper {
 
     public static MobileElement findElementById(String id) {
+        return findElementById(id, 3000);
+    }
+
+    public static MobileElement findElementById(String id, int timeout) {
         MobileElement mobileElement = null;
-        final int TIMEOUT = 3000;
         long startTime, currentTime;
         startTime = currentTime = System.currentTimeMillis();
-        while (currentTime - startTime < TIMEOUT) {
+        while (currentTime - startTime < timeout) {
             try {
                 sleep(50);
             } catch (InterruptedException e) {

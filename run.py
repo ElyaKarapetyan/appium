@@ -111,7 +111,6 @@ def create_package():
     Creates XML for TestNG package
     """
     packages = xmlParser.Element('packages')
-    current_work_dir = os.getcwd()
     packageName = CLASS_NAME_PREFIX
     package_xmp = xmlParser.Element('package', name=packageName)
     packages.append(package_xmp)
@@ -148,6 +147,7 @@ def main():
     generate_testngxml_file()
 
     print ('java -cp ' + ROOT_DIR + '/target/news_app-1.0-SNAPSHOT.jar org.testng.TestNG ' + ROOT_DIR + '/src/main/java/testNG.xml')
+    terminal.call(["mvn", "package"])
     terminal.run(["appium"])
     terminal.call(["java", "-cp","target/news_app-1.0-SNAPSHOT-jar-with-dependencies.jar","org.testng.TestNG","src/main/java/testNG.xml"])
 

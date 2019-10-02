@@ -1,4 +1,4 @@
 .idea
 target/**
 *.iml
-./testNG.xml
+src/main/java/testNG.xml

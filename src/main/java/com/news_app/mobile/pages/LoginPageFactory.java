@@ -44,6 +44,11 @@ public class LoginPageFactory {
         Constants.driver.hideKeyboard();
     }
 
+    public void clickOnLoginButton() {
+        loginButton.click();
+        WaitHelpers.waitForElementDisapear(loginButton, 5000);
+    }
+
     public MobileElement getLockIcon() {
         return lockIcon;
     }
@@ -63,4 +68,5 @@ public class LoginPageFactory {
     public MobileElement getCreateAccountLinkedText() {
         return createAccountLinkedText;
     }
+
 }
