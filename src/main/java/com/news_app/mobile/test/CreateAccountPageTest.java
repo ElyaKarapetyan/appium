@@ -1,6 +1,8 @@
 package com.news_app.mobile.test;
 
 import com.news_app.mobile.Hooks;
+import com.news_app.mobile.constants.Constants;
+import com.news_app.mobile.constants.CreateAccountPageConstants;
 import com.news_app.mobile.pages.CreateAccountPageFactory;
 import com.news_app.mobile.pages.LoginPageFactory;
 import com.news_app.mobile.utils.helper.Helper;
@@ -25,18 +27,18 @@ public class CreateAccountPageTest extends Hooks {
     @Test
     public void checkCreateAccountFunctionality() {
         pageFactory.typeEmail(Helper.generateEmail());
-        pageFactory.typePassword("Tester001!");
+        pageFactory.typePassword(Constants.VALID_PASSWORD);
         pageFactory.clickOnTheCreateAccountButton();
         WaitHelpers.waitForElementDisapear(pageFactory.getCreateAccountButton(), 5000);
-        assertFalse(pageFactory.getCreateAccountButton().isDisplayed(), "Failed account creation");
+        assertFalse(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.FAILED_TO_CREATE_ACCOUT_MESSAGE);
     }
 
     @Test
     public void checkCreateAccountFunctionalityWithIncorrectEmailFormat() {
-        pageFactory.typeEmail("testUser");
-        pageFactory.typePassword("Tester001!");
+        pageFactory.typeEmail(Constants.INVALID_EMAIL);
+        pageFactory.typePassword(Constants.VALID_PASSWORD);
         pageFactory.clickOnTheCreateAccountButton();
-        assertTrue(pageFactory.getCreateAccountButton().isDisplayed(), "Fail: Created account with invalid email/password");
+        assertTrue(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.ACCOUNT_CREATED_MESSAGE);
     }
 
     @AfterClass

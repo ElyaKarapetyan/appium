@@ -1,14 +1,12 @@
 package com.news_app.mobile.pages;
 
 import com.news_app.mobile.constants.Constants;
-import com.news_app.mobile.utils.helper.WaitHelpers;
+import com.news_app.mobile.constants.CreateAccountPageConstants;
 import io.appium.java_client.MobileElement;
 
 import static com.news_app.mobile.utils.helper.Helper.findElementById;
 
 public class CreateAccountPageFactory {
-
-    private static CreateAccountPageFactory createAccountPageFactory;
 
     private MobileElement lockIcon;
     private MobileElement emailInputField;
@@ -17,11 +15,11 @@ public class CreateAccountPageFactory {
     private MobileElement loginLinkedText;
 
     public CreateAccountPageFactory() {
-        lockIcon = findElementById("com.example.anush.demo_news:id/imgView_logo");
-        emailInputField = findElementById("com.example.anush.demo_news:id/emailText");
-        passwordInputField = findElementById("com.example.anush.demo_news:id/passwordText");
-        createAccountButton = findElementById("com.example.anush.demo_news:id/buttonRegister");
-        loginLinkedText = findElementById("com.example.anush.demo_news:id/buttonLogin");
+        lockIcon = findElementById(CreateAccountPageConstants.LOGO_ID);
+        emailInputField = findElementById(CreateAccountPageConstants.EMAIL_INPUT_FIELD_ID);
+        passwordInputField = findElementById(CreateAccountPageConstants.PASSWORD_INPUT_FIELD_ID);
+        createAccountButton = findElementById(CreateAccountPageConstants.CREATE_ACCOUNT_BUTTON_ID);
+        loginLinkedText = findElementById(CreateAccountPageConstants.LOGIN_LINKED_TEXT_ID);
     }
 
     public void typeEmail(String email) {
@@ -38,28 +36,7 @@ public class CreateAccountPageFactory {
         createAccountButton.click();
     }
 
-    public MobileElement clickOnTheLoginLinkedText() {
-        loginLinkedText.click();
-        return findElementById("");
-    }
-
-    public MobileElement getLockIcon() {
-        return lockIcon;
-    }
-
-    public MobileElement getEmailInputField() {
-        return emailInputField;
-    }
-
-    public MobileElement getPasswordInputField() {
-        return passwordInputField;
-    }
-
     public MobileElement getCreateAccountButton() {
         return createAccountButton;
-    }
-
-    public MobileElement getLoginLinkedText() {
-        return loginLinkedText;
     }
 }
