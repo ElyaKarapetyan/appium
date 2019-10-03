@@ -8,7 +8,6 @@ import com.news_app.mobile.pages.LoginPageFactory;
 import com.news_app.mobile.utils.helper.Helper;
 import com.news_app.mobile.utils.helper.WaitHelpers;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -30,15 +29,29 @@ public class CreateAccountPageTest extends Hooks {
         pageFactory.typePassword(Constants.VALID_PASSWORD);
         pageFactory.clickOnTheCreateAccountButton();
         WaitHelpers.waitForElementDisapear(pageFactory.getCreateAccountButton(), 5000);
-        assertFalse(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.FAILED_TO_CREATE_ACCOUT_MESSAGE);
+        assertFalse(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.FAILED_TO_CREATE_ACCOUNT_MESSAGE);
     }
 
     @Test
-    public void checkCreateAccountFunctionalityWithIncorrectEmailFormat() {
+    public void checkCreateAccountFunctionalityWithInvalidEmailFormat() {
         pageFactory.typeEmail(Constants.INVALID_EMAIL);
         pageFactory.typePassword(Constants.VALID_PASSWORD);
         pageFactory.clickOnTheCreateAccountButton();
         assertTrue(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.ACCOUNT_CREATED_MESSAGE);
+    }
+
+    @Test
+    public void checkCreateAccountFunctionalityWithOutPassword() {
+        pageFactory.typeEmail(Constants.VALID_EMAIL);
+        pageFactory.clickOnTheCreateAccountButton();
+        assertTrue(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.SHOULD_NOT_CREATE_ACCOUNT_WITHOUT_PASSWORD_MESSAGE);
+    }
+
+    @Test
+    public void checkCreateAccountFunctionalityWithOutEmail() {
+        pageFactory.typePassword(Constants.VALID_PASSWORD);
+        pageFactory.clickOnTheCreateAccountButton();
+        assertTrue(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.SHOULD_NOT_CREATE_ACCOUNT_WITHOUT_EMAIL_MESSAGE);
     }
 
     @AfterClass

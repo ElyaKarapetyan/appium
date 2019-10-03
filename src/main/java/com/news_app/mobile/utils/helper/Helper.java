@@ -3,9 +3,7 @@ package com.news_app.mobile.utils.helper;
 import com.news_app.mobile.constants.Constants;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.NoSuchElementException;
-
 import java.sql.Timestamp;
-
 import static java.lang.Thread.sleep;
 
 public class Helper {

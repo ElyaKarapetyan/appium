@@ -2,7 +2,6 @@ package com.news_app.mobile.pages;
 
 import com.news_app.mobile.constants.Constants;
 import com.news_app.mobile.constants.LoginPageConstants;
-import com.news_app.mobile.utils.helper.WaitHelpers;
 import io.appium.java_client.MobileElement;
 
 import static com.news_app.mobile.utils.helper.Helper.findElementById;
@@ -35,7 +34,6 @@ public class LoginPageFactory {
 
     public void clickOnLoginButton() {
         loginButton.click();
-        WaitHelpers.waitForElementDisapear(loginButton, 5000);
     }
 
     public MobileElement getLoginButton() {

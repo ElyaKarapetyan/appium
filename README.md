@@ -22,4 +22,4 @@ To run test cases follow the steps mentioned bellow
                    --testName <test name from test class>\
                    
   Simple run command 
-  - python3 run.py ----deviceName Google_Pixel_2 --osVersion 9.0 --deviceID <device_id>
+  - python3 run.py --deviceName Google_Pixel_2 --osVersion 9.0 --deviceID <device_id>
