@@ -16,6 +16,7 @@ CLASS_NAME_PREFIX = "com.news_app.mobile.test"
 CLASS_NAME_PATH_PREFIX = "/src/main/java/com/news_app/mobile/test/"
 DEFAULT_APK_FILE_NAME = 'app-release.apk'
 DEFAULT_LOCAL_CONFIG_FILE_NAME = 'devicesConfig.json'
+SCREENSHOT_FILE_PATH = "test-output/screenshots"
 
 PYTHON_VERSION = platform.python_version()
 
@@ -145,6 +146,9 @@ def main():
     generate_testng()
 
     generate_testngxml_file()
+
+    if not os.path.isfile(SCREENSHOT_FILE_PATH):
+        terminal.call(["mkdir", SCREENSHOT_FILE_PATH])
 
     print ('java -cp ' + ROOT_DIR + '/target/news_app-1.0-SNAPSHOT.jar org.testng.TestNG ' + ROOT_DIR + '/src/main/java/testNG.xml')
     terminal.call(["mvn", "package"])

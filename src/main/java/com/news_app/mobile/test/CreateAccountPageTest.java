@@ -37,7 +37,7 @@ public class CreateAccountPageTest extends Hooks {
         pageFactory.typeEmail(Constants.INVALID_EMAIL);
         pageFactory.typePassword(Constants.VALID_PASSWORD);
         pageFactory.clickOnTheCreateAccountButton();
-        assertTrue(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.ACCOUNT_CREATED_MESSAGE);
+        assertFalse(pageFactory.getCreateAccountButton().isDisplayed(), CreateAccountPageConstants.ACCOUNT_CREATED_MESSAGE);
     }
 
     @Test

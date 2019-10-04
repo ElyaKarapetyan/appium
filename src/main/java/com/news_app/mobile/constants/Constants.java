@@ -4,6 +4,7 @@ import io.appium.java_client.MobileDriver;
 
 public class Constants {
 
+    public static final String SCREENSHOTS_PATH = "test-output/screenshots/";
     public static MobileDriver driver;
 
     public static final String VALID_EMAIL = "test@gmail.com";

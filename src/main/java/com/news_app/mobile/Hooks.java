@@ -4,9 +4,16 @@ import com.news_app.mobile.constants.Constants;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -45,6 +52,18 @@ public class Hooks {
             e.printStackTrace();
         }
         waitForProgress();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown(ITestResult result, Method method) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            File screenShotFile = ((TakesScreenshot) Constants.driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(screenShotFile, new File(Constants.SCREENSHOTS_PATH + method.getName() + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void quitDriver() {
